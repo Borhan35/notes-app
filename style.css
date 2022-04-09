@@ -10,7 +10,17 @@ body {
     height: 100vh;
     background-color: #0093AB;
 }
-.note-wrp{
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 45%);
+    z-index: 5;
+    display: none;
+}
+.note--wrp{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,7 +53,107 @@ body {
 }
 
 
-.notes-list{
+.notes--list{
     margin-top: 85px;
-    padding: 20px 25px;
+    padding: 15px 25px;
+}
+
+.modal{
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 550px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 18px;
+    border-radius: 5px;
+    box-shadow:0px 0px 8px 2px rgb(0 0 0 / 25%);
+    display: none;
+    z-index: 10;
+}
+.db{
+    display: block;
+}
+.modal--header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal--header label{
+    display: block;
+    color: #06113C;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.modal--header input{
+    outline: none;
+    border: 1px solid #DDDDDD;
+    width: 100%;
+    height: 33px;
+    box-sizing: border-box;
+    padding: 4px 7px;
+    font-size: 16px;
+}
+.modal--title{
+    flex: 1;
+    margin-right: 25px;
+}
+
+.text--editor{
+    border: 1px solid #DDDDDD;
+    margin-top: 25px;
+}
+.editor--header{
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+    border-bottom: 1px solid #DDDDDD;
+}
+.editor--header i{
+    font-size: 15px;
+    padding: 7px;
+    cursor: pointer;
+}
+.text--editor textarea{
+    outline: none;
+    resize: none;
+    border: none;
+    padding: 6px 10px;
+    font-size: 16px;
+    width: 100%;
+    height: 250px;
+    box-sizing: border-box;
+}
+.text--editor textarea::-webkit-scrollbar{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 0;
+}
+.cancel,
+.save{
+    width: 100px;
+    height: 33px;
+    border: none;
+    outline: none;
+    background-color: #FF8C32;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.save{
+    margin-left: 10px;
+}
+.editor-btn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
 }

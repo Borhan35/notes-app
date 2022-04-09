@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Notes App</title>
-        <link rel="stylesheet" href="style.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-        />
-        <script src="app.js" defer></script>
-    </head>
-    <body>
-        <div class="note-wrp">
-            <div class="logo"><h4>Today <span>Notes</span></h4></div>
-            <div class="dates"> 3 March 2022</div>
-            <button class="add" id="add">
-                <i class="fas fa-plus"></i> Add note
-            </button>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <div class="note--wrp">
+        <div class="logo">
+            <h4>Today <span>Notes</span></h4>
         </div>
-        <div class="notes-list">
-            
+        <div class="dates"> 3 March 2022</div>
+        <button class="add">
+            <i class="fas fa-plus"></i> Add Note
+        </button>
+    </div>
+    <div class="notes--list">
+
+    </div>
+
+    <div class="modal">
+        <div class="modal--header">
+            <div class="modal--title">
+                <label for="title">Today Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="moda--date">
+                <label for="date">Set Date</label>
+                <input type="date" />
+            </div>
         </div>
-    </body>
+        <div class="text--editor">
+            <div class="editor--header">
+                <div class="bold"><i class="fas fa-bold"></i></div>
+                <div class="italic"><i class="fas fa-italic"></i></div>
+                <div class="bold"><i class="fas fa-underline"></i></div>
+                <div class="bold"><i class="fas fa-align-left"></i></div>
+                <div class="bold"><i class="fas fa-align-center"></i></div>
+                <div class="bold"><i class="fas fa-align-right"></i></div>
+            </div>
+            <textarea></textarea>
+        </div>
+        <div class="editor-btn">
+            <button class="cancel">Cancel</button>
+            <button class="save">Save</button>
+        </div>
+    </div>
+
+</body>
+
 </html>
