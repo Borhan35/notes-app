@@ -3,9 +3,17 @@
 // Element Selection
 const noteHeader = document.querySelector('.note--wrp');
 const dates = noteHeader.querySelector('.dates');
-const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
-const cancel = document.querySelector('.cancel');
+
+const modal = document.querySelector('.modal');
+const cancel = modal.querySelector('.cancel');
+const save = modal.querySelector('.save');
+const inputTitle = modal.querySelector('#title');
+const inputDates = modal.querySelector('#date');
+const textarea = modal.querySelector('textarea');
+
+
+let state = [];
 
 // Set Today Time
 (function setDate(){
@@ -30,17 +38,38 @@ const showNotesModal = function(el) {
 const modalHide = function(){
     modal.classList.remove('db');
     backdrop.classList.remove('db');
+    if(window.confirm('Do you really want to leave?') === false)return;
 }
 
 // Hide Notes
 const hideNotesModal = function(){
     modalHide();
 };
+
 // Cancel Notes
-const cancelNotesModal = function(){
+const cancelNotesModal = function(el){
+    el.preventDefault();
     modalHide();
 };
 
+// Save Data
+const saveNotesHandler = function(el){
+    el.preventDefault();
+    const title = inputTitle.value.trim();
+    const date = inputDates.value;
+    const notes = textarea.value.trim();
+    state = [
+        ...state,
+        {
+            title,
+            date,
+            notes
+        }
+    ];
+    console.log(state)
+}
+
+save.addEventListener('click', saveNotesHandler);
 cancel.addEventListener('click', cancelNotesModal);
 backdrop.addEventListener('click', hideNotesModal);
 noteHeader.addEventListener('click', showNotesModal);
