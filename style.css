@@ -2,6 +2,8 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -26,7 +28,7 @@ body {
     justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
-    padding: 5px 25px;
+    padding: 18px 25px;
     background-color: #06113C;
     position: fixed;
     top: 0;
@@ -54,8 +56,15 @@ body {
 
 
 .notes--list{
-    margin-top: 85px;
-    padding: 15px 25px;
+    margin-top: 68px;
+    padding: 15px 22px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notes--item{
+    background-color: #fff;
+    margin: 5px;
 }
 
 .modal{
@@ -110,12 +119,11 @@ body {
 .editor--header{
     display: flex;
     align-items: center;
-    padding: 0px 5px;
     border-bottom: 1px solid #DDDDDD;
 }
 .editor--header i{
     font-size: 15px;
-    padding: 7px;
+    padding: 7px 12px;
     cursor: pointer;
 }
 .text--editor textarea{
@@ -151,9 +159,15 @@ body {
 .save{
     margin-left: 10px;
 }
-.editor-btn{
+.editor--btm--btn{
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-top: 20px;
+}
+.active{
+    background-color: #DDDDDD;
+}
+.bold{
+    font-weight: bold;
 }
