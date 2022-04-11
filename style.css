@@ -1,3 +1,4 @@
+/* Typograpy */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
 * {
@@ -12,7 +13,7 @@ body {
     height: 100vh;
     background-color: #0093AB;
 }
-.backdrop{
+.backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,7 +23,13 @@ body {
     z-index: 5;
     display: none;
 }
-.note--wrp{
+
+
+/* End typograpy */
+
+
+/* Note Header Wrap */
+.note--wrp {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,17 +41,21 @@ body {
     top: 0;
     left: 0;
 }
-.logo h4{
+
+.logo h4 {
     font-size: 18px;
     color: #FF8C32;
 }
-.logo h4 span{
+
+.logo h4 span {
     color: #fff;
 }
-.dates{
+
+.dates {
     color: #fff;
     font-size: 18px;
 }
+
 .add {
     background-color: #FF8C32;
     border-radius: 3px;
@@ -54,20 +65,66 @@ body {
     padding: 0.5rem 1rem;
 }
 
-
-.notes--list{
+/* Note List Wrap */
+.notes--list {
     margin-top: 68px;
-    padding: 15px 22px;
+    padding: 15px 20px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.notes--item{
+/* Notes Item */
+.notes--item {
     background-color: #fff;
     margin: 5px;
+    border-radius: 5px;
+    max-width: 300px;
+    width: 100%;
 }
 
-.modal{
+/* Notes Head  */
+.notes--head {
+    background-color: #06113C;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.notes--head--left span {
+    color: #fff;
+    font-size: 15px;
+}
+
+.notes--head--right button {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #FF8C32;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.notes--head--right button:not(:last-child) {
+    margin-right: 5px;
+}
+
+/* Notes body */
+.notes--body {
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.notes--body h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/*========================= Modal Style======================== */
+.modal {
     background-color: #fff;
     position: absolute;
     left: 50%;
@@ -78,27 +135,28 @@ body {
     box-sizing: border-box;
     padding: 20px 18px;
     border-radius: 5px;
-    box-shadow:0px 0px 8px 2px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0px 8px 2px rgb(0 0 0 / 25%);
     display: none;
     z-index: 10;
 }
-.db{
+.db {
     display: block;
 }
-.modal--header{
+.modal--header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.modal--header label{
+.modal--header label {
     display: block;
     color: #06113C;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 3px;
 }
-.modal--header input{
+
+.modal--header input {
     outline: none;
     border: 1px solid #DDDDDD;
     width: 100%;
@@ -107,26 +165,30 @@ body {
     padding: 4px 7px;
     font-size: 16px;
 }
-.modal--title{
+
+.modal--title {
     flex: 1;
     margin-right: 25px;
 }
 
-.text--editor{
+.text--editor {
     border: 1px solid #DDDDDD;
     margin-top: 25px;
 }
-.editor--header{
+
+.editor--header {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #DDDDDD;
 }
-.editor--header i{
+
+.editor--header i {
     font-size: 15px;
     padding: 7px 12px;
     cursor: pointer;
 }
-.text--editor textarea{
+
+.text--editor textarea {
     outline: none;
     resize: none;
     border: none;
@@ -136,13 +198,15 @@ body {
     height: 250px;
     box-sizing: border-box;
 }
-.text--editor textarea::-webkit-scrollbar{
+
+.text--editor textarea::-webkit-scrollbar {
     appearance: none;
     -webkit-appearance: none;
     width: 0;
 }
+
 .cancel,
-.save{
+.save {
     width: 100px;
     height: 33px;
     border: none;
@@ -156,18 +220,15 @@ body {
     justify-content: center;
     cursor: pointer;
 }
-.save{
+
+.save {
     margin-left: 10px;
 }
-.editor--btm--btn{
+
+.editor--btm--btn {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-top: 20px;
 }
-.active{
-    background-color: #DDDDDD;
-}
-.bold{
-    font-weight: bold;
-}
+
