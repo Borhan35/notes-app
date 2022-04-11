@@ -61,23 +61,34 @@ const cancelNotesModal = function (el) {
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         const action = e.target.parentNode.dataset.action;
-        if(action){
+        console.log(action)
+        if (action) {
             document.execCommand(action, false);
         }
     });
 });
 
+
 // Render Notes List
-const render = function(notes){
+const render = function (notes) {
     let notesItem = '';
     notes = [...notes].forEach((note, index) => {
+        const isDate = note.date;
         notesItem += `
         <div class="notes--item" data-id="${index}">
             <div class="notes--head">
-                <h4>${note.title}</h4>
-                <span>${note.date}</span>
+                <div class="notes--head--left">
+                    ${isDate === 'Invalid Date' ? '' : `<span>${isDate}</span>`}
+                </div>
+                <div class="notes--head--right">
+                    <button class="btn--edit" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn--close" title="Close"><i class="fas fa-times"></i></button>
+                </div>
             </div>
-            <div class="note--text">${note.text}</div>
+            <div class="notes--body">
+                <h4>${note.title}</h4>
+                <div class="note--text">${note.text}</div>
+            </div>
         </div>
         `;
         return notes;
@@ -87,13 +98,17 @@ const render = function(notes){
     inputTitle.value = '';
     inputDates.value = '';
     textarea.value = '';
-}
+};
 
 // Save Data
 const saveNotesHandler = function (el) {
     el.preventDefault();
     const title = inputTitle.value.trim();
-    const date = inputDates.value;
+    const date = new Date(inputDates.value).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });
     const text = textarea.value.trim();
     notes = [
         ...notes,
@@ -103,10 +118,8 @@ const saveNotesHandler = function (el) {
             text
         }
     ];
-    render(notes)
+    render(notes);
 };
-
-console.log(inputDates)
 
 
 save.addEventListener('click', saveNotesHandler);
