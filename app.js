@@ -11,7 +11,7 @@ const cancel = modal.querySelector('.cancel');
 const save = modal.querySelector('.save');
 const inputTitle = modal.querySelector('#title');
 const inputDates = modal.querySelector('#date');
-const textarea = modal.querySelector('textarea');
+const textarea = modal.querySelector('.text--box');
 // const editorFeatures = modal.querySelector('.editor--header');
 const buttons = modal.querySelectorAll('.editor-btn');
 
@@ -43,7 +43,7 @@ const showNotesModal = function (el) {
 const modalHide = function () {
     modal.classList.remove('db');
     backdrop.classList.remove('db');
-}
+};
 
 // Hide Notes
 const hideNotesModal = function () {
@@ -60,13 +60,19 @@ const cancelNotesModal = function (el) {
 // Add toolbar button actions
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        const action = e.target.parentNode.dataset.action;
-        console.log(action)
-        if (action) {
-            document.execCommand(action, false);
+        e.preventDefault();
+        const execCommands = (tag) => {
+            document.execCommand(`${tag}`, false, "");
         }
+        const action = e.target.parentNode.dataset.action;
+        const tag = e.target.parentNode.dataset.tag;
+        if(action){
+            execCommands(`${tag}`);
+        };
+
     });
 });
+
 
 
 // Render Notes List
@@ -97,19 +103,19 @@ const render = function (notes) {
     modalHide();
     inputTitle.value = '';
     inputDates.value = '';
-    textarea.value = '';
+    textarea.innerHTML = '';
 };
 
 // Save Data
 const saveNotesHandler = function (el) {
     el.preventDefault();
     const title = inputTitle.value.trim();
-    const date = new Date(inputDates.value).toLocaleString('en-US', {
+    const date = new Date(inputDates.value).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
     });
-    const text = textarea.value.trim();
+    const text = textarea.innerHTML;
     notes = [
         ...notes,
         {
