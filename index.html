@@ -38,14 +38,15 @@
         </div>
         <div class="text--editor">
             <div class="editor--header">
-                <div class="editor-btn" data-action="bold" data-tag-name="b" title="Bold"><i class="fas fa-bold"></i></div>
-                <div class="editor-btn" data-action="italic" data-tag-name="i" title="italic"><i class="fas fa-italic"></i></div>
-                <div class="editor-btn" data-action="underline" data-tag-name="u" title="underline"><i class="fas fa-underline"></i></div>
-                <div class="editor-btn" data-action="left" data-style="textAlign: left" title="left"><i class="fas fa-align-left"></i></div>
-                <div class="editor-btn" data-action="center" data-style="textAlign: center"title="center"><i class="fas fa-align-center"></i></div>
-                <div class="editor-btn" data-action="right" data-style="textAlign: right"title="right"><i class="fas fa-align-right"></i></div>
+                <button class="editor-btn" data-action="bold" data-tag="bold"><i class="fas fa-bold"></i></button>
+                <button class="editor-btn" data-action="italic" data-tag="italic"><i class="fas fa-italic"></i></button>
+                <button class="editor-btn" data-action="underline" data-tag="underline"><i class="fas fa-underline"></i></button>
+                <button class="editor-btn" data-action="left" data-tag="justifyLeft"><i class="fas fa-align-left"></i></button>
+                <button class="editor-btn" data-action="center" data-tag="justifyCenter"><i class="fas fa-align-center"></i></button>
+                <button class="editor-btn" data-action="right" data-tag="justifyRight"><i class="fas fa-align-right"></i></button>
+                <button class="editor-btn" data-action="ul" data-tag="insertUnorderedList"><i class="fas fa-list"></i></button>
             </div>
-            <textarea></textarea>
+            <div contenteditable="true" class="text--box"></div>
         </div>
         <div class="editor--btm--btn">
             <button class="cancel">Cancel</button>

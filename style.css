@@ -23,7 +23,9 @@ body {
     z-index: 5;
     display: none;
 }
-
+.bold{
+    font-weight: bold;
+}
 
 /* End typograpy */
 
@@ -182,13 +184,16 @@ body {
     border-bottom: 1px solid #DDDDDD;
 }
 
-.editor--header i {
+.editor--header button {
     font-size: 15px;
-    padding: 7px 12px;
+    padding: 7px 8px;
     cursor: pointer;
+    background: transparent;
+    outline: none;
+    border: none;
 }
 
-.text--editor textarea {
+.text--editor .text--box {
     outline: none;
     resize: none;
     border: none;
