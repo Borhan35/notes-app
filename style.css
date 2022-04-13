@@ -74,6 +74,9 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
+.note--text ul{
+    margin-left: 25px;
+}
 
 /* Notes Item */
 .notes--item {
@@ -182,6 +185,10 @@ body {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #DDDDDD;
+}
+
+.text--box ul{
+    margin-left: 25px;
 }
 
 .editor--header button {
