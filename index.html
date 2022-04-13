@@ -25,15 +25,15 @@
 
     </div>
 
-    <form class="modal">
+    <form class="modal" name="modal">
         <div class="modal--header">
             <div class="modal--title">
                 <label for="title">Note Title</label>
-                <input type="text" name="title" id="title">
+                <input type="text" name="title" class="title">
             </div>
-            <div class="moda--date">
+            <div class="modal--date">
                 <label for="date">Note Date</label>
-                <input type="date" name="date" id="date" />
+                <input type="date" name="date" class="date" />
             </div>
         </div>
         <div class="text--editor">
@@ -49,8 +49,8 @@
             <div contenteditable="true" class="text--box"></div>
         </div>
         <div class="editor--btm--btn">
-            <button class="cancel">Cancel</button>
-            <button class="save">Save</button>
+            <button class="cancel"type="cancel" >Cancel</button>
+            <button class="save" type="submit">Save</button>
         </div>
     </form>
 

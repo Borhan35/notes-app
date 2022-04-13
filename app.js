@@ -1,21 +1,17 @@
 "use-strict";
 
 // Element Selection
+const backdrop = document.querySelector('.backdrop');
 const noteHeader = document.querySelector('.note--wrp');
 const notesList = document.querySelector('.notes--list');
 const dates = noteHeader.querySelector('.dates');
-const backdrop = document.querySelector('.backdrop');
-
-const modal = document.querySelector('.modal');
-const cancel = modal.querySelector('.cancel');
-const save = modal.querySelector('.save');
-const inputTitle = modal.querySelector('#title');
-const inputDates = modal.querySelector('#date');
+const modal = document.forms.modal;
+const inputTitle = modal.title;
+const inputDates = modal.date;
 const textarea = modal.querySelector('.text--box');
-// const editorFeatures = modal.querySelector('.editor--header');
 const buttons = modal.querySelectorAll('.editor-btn');
 
-
+// State
 let notes = [];
 
 // Set Today Time
@@ -46,32 +42,52 @@ const modalHide = function () {
 };
 
 // Hide Notes
-const hideNotesModal = function () {
-    modalHide();
-};
+const hideNotesModal = () => modalHide();
+
 
 // Cancel Notes
-const cancelNotesModal = function (el) {
-    el.preventDefault();
+const cancelNotesModal = (el) =>{
+    if (!el.target.classList.contains('cancel')) return;
     modalHide();
-};
+} 
+
 
 
 // Add toolbar button actions
+// buttons.forEach(btn => {
+//     btn.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         const execCommands = (tag) => {
+//             document.execCommand(`${tag}`, false, "");
+//         }
+//         const action = e.target.parentNode.dataset.action;
+//         const tag = e.target.parentNode.dataset.tag;
+//         if (action) {
+//             execCommands(`${tag}`);
+//         };
+
+//     });
+// });
+
+
+
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const execCommands = (tag) => {
-            document.execCommand(`${tag}`, false, "");
-        }
-        const action = e.target.parentNode.dataset.action;
+        let appliedCmds = [];
+        let specificTag = 'i';
         const tag = e.target.parentNode.dataset.tag;
-        if(action){
-            execCommands(`${tag}`);
-        };
-
+        let node = window.getSelection().focusNode;
+        while(node.tagName !== 'italic') {
+        if(node.tagName === specificTag){//you can add multiple checks here for the cmds or tags you wanna find.
+            appliedCmds.push(node.tagName);
+        }
+        node = node.parentElement;
+        } 
     });
 });
+
+
 
 
 
@@ -100,11 +116,11 @@ const render = function (notes) {
         return notes;
     });
     notesList.innerHTML = notesItem;
-    modalHide();
     inputTitle.value = '';
     inputDates.value = '';
     textarea.innerHTML = '';
 };
+
 
 // Save Data
 const saveNotesHandler = function (el) {
@@ -125,10 +141,16 @@ const saveNotesHandler = function (el) {
         }
     ];
     render(notes);
+    modalHide();
 };
 
 
-save.addEventListener('click', saveNotesHandler);
-cancel.addEventListener('click', cancelNotesModal);
-backdrop.addEventListener('click', hideNotesModal);
-noteHeader.addEventListener('click', showNotesModal);
+// Init
+const init = () => {
+    modal.addEventListener('submit', saveNotesHandler);
+    modal.addEventListener('click', cancelNotesModal);
+    backdrop.addEventListener('click', hideNotesModal);
+    noteHeader.addEventListener('click', showNotesModal);
+}
+
+init();
