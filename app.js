@@ -29,10 +29,13 @@ let notes = [];
 
 
 // Add Notes
-const showNotesModal = function (el) {
-    if (!el.target.classList.contains('add')) return;
+const showNotes = function () {
     modal.classList.add('db');
     backdrop.classList.add('db');
+}
+const showNotesModal = function (el) {
+    if (!el.target.classList.contains('add')) return;
+    showNotes();
 };
 
 // Modal Hide
@@ -46,49 +49,28 @@ const hideNotesModal = () => modalHide();
 
 
 // Cancel Notes
-const cancelNotesModal = (el) =>{
+const cancelNotesModal = (el) => {
     if (!el.target.classList.contains('cancel')) return;
     modalHide();
-} 
+}
 
 
 
 // Add toolbar button actions
-// buttons.forEach(btn => {
-//     btn.addEventListener('click', (e) => {
-//         e.preventDefault();
-//         const execCommands = (tag) => {
-//             document.execCommand(`${tag}`, false, "");
-//         }
-//         const action = e.target.parentNode.dataset.action;
-//         const tag = e.target.parentNode.dataset.tag;
-//         if (action) {
-//             execCommands(`${tag}`);
-//         };
-
-//     });
-// });
-
-
-
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        let appliedCmds = [];
-        let specificTag = 'i';
-        const tag = e.target.parentNode.dataset.tag;
-        let node = window.getSelection().focusNode;
-        while(node.tagName !== 'italic') {
-        if(node.tagName === specificTag){//you can add multiple checks here for the cmds or tags you wanna find.
-            appliedCmds.push(node.tagName);
+        const execCommands = (tag) => {
+            document.execCommand(`${tag}`, false, "");
         }
-        node = node.parentElement;
-        } 
+        const action = e.target.parentNode.dataset.action;
+        const tag = e.target.parentNode.dataset.tag;
+        if (action) {
+            execCommands(`${tag}`);
+        };
+
     });
 });
-
-
-
 
 
 // Render Notes List
@@ -103,7 +85,7 @@ const render = function (notes) {
                     ${isDate === 'Invalid Date' ? '' : `<span>${isDate}</span>`}
                 </div>
                 <div class="notes--head--right">
-                    <button class="btn--edit" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn--edit" type="edit" title="Edit"><i class="fas fa-edit"></i></button>
                     <button class="btn--close" title="Close"><i class="fas fa-times"></i></button>
                 </div>
             </div>
@@ -113,7 +95,7 @@ const render = function (notes) {
             </div>
         </div>
         `;
-        return notes;
+        return note;
     });
     notesList.innerHTML = notesItem;
     inputTitle.value = '';
@@ -144,9 +126,61 @@ const saveNotesHandler = function (el) {
     modalHide();
 };
 
+// Close Notes handler
+const closeItemHandler = (e) => {
+    if (!e.target.closest('.btn--close')) return;
+    const id = parseInt(e.target.closest('.notes--item').getAttribute('data-id'), 10);
+    notes = notes.filter((note, index) => id !== index);
+    render(notes);
+};
+
+const editItemHandler = (e) => {
+    if (!e.target.closest('.btn--edit')) return;
+    const id = parseInt(e.target.closest('.notes--item').getAttribute('data-id'), 10);
+    // modal.setAttribute('key', id);
+    // const key = parseInt(modal.getAttribute('key'), 10);
+
+    const copyTitle = notes[id].title;
+    const copyText = notes[id].text;
+    const copyDate = notes[id].date;
+
+    inputTitle.value = copyTitle;
+    textarea.innerHTML = copyText;
+    inputDates.value = copyDate;
+
+    showNotes();
+
+    const btnEditHandler = () => {
+        const title = inputTitle.value;
+        notes = notes.map((note, index) => {
+            if (id === index) {
+                return {
+                    ...note,
+                    title
+                }
+            }
+            return note;
+        });
+        render(notes);
+        console.log(notes)
+
+        modalHide();
+        this.removeEventListener('click', btnEditHandler);
+        modal.querySelector('.cancel').style.display = 'none';
+
+    }
+
+    modal.querySelector('.cancel').style.display = 'none';
+    const btnEdit = modal.querySelector('.save');
+    btnEdit.removeAttribute('type', 'submit');
+    btnEdit.setAttribute('type', 'button', );
+    btnEdit.addEventListener('click', btnEditHandler);
+}
 
 // Init
 const init = () => {
+    notesList.addEventListener('click', editItemHandler);
+    notesList.addEventListener('click', closeItemHandler);
     modal.addEventListener('submit', saveNotesHandler);
     modal.addEventListener('click', cancelNotesModal);
     backdrop.addEventListener('click', hideNotesModal);
