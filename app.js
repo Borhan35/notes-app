@@ -145,8 +145,6 @@ const editItemHandler = (e) => {
     inputTitle.value = copytitle;
     textarea.innerHTML = notes[id].text;
     inputDates.value = notes[id].date;
-    const key = modal.setattribute('key', `${id}`);
-    console.log(key)
     if (id === 0) {
         const btnEditHandler = (e) => {
             e.stopPropagation();
