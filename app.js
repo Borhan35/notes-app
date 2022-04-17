@@ -13,6 +13,7 @@ const buttons = modal.querySelectorAll('.editor-btn');
 
 // State
 let notes = [];
+let nonteId = 0;
 
 // Set Today Time
 (function setDate() {
@@ -76,7 +77,7 @@ buttons.forEach(btn => {
 // Render Notes List
 const render = function (notes) {
     let notesItem = '';
-    notes = [...notes].forEach((note, index) => {
+    notes = notes.forEach((note, index) => {
         const isDate = note.date;
         notesItem += `
         <div class="notes--item" data-id="${index}">
@@ -114,9 +115,11 @@ const saveNotesHandler = function (el) {
         year: 'numeric',
     });
     const text = textarea.innerHTML;
+    const id = nonteId++;
     notes = [
         ...notes,
         {
+            id,
             title,
             date,
             text
@@ -137,44 +140,45 @@ const closeItemHandler = (e) => {
 const editItemHandler = (e) => {
     if (!e.target.closest('.btn--edit')) return;
     const id = parseInt(e.target.closest('.notes--item').getAttribute('data-id'), 10);
-    // modal.setAttribute('key', id);
-    // const key = parseInt(modal.getAttribute('key'), 10);
 
-    const copyTitle = notes[id].title;
-    const copyText = notes[id].text;
-    const copyDate = notes[id].date;
+    const copytitle = notes[id].title;
+    inputTitle.value = copytitle;
+    textarea.innerHTML = notes[id].text;
+    inputDates.value = notes[id].date;
+    const key = modal.setattribute('key', `${id}`);
+    console.log(key)
+    if (id === 0) {
+        const btnEditHandler = (e) => {
+            e.stopPropagation();
+            if (!e.target.closest('.save')) return;
+            const title = inputTitle.value.trim();
 
-    inputTitle.value = copyTitle;
-    textarea.innerHTML = copyText;
-    inputDates.value = copyDate;
+            notes[id].title = title;
+            // const date = new Date(inputDates.value).toLocaleDateString('en-US', {
+            //     day: 'numeric',
+            //     month: 'long',
+            //     year: 'numeric',
+            // });
+            // if(title !== copytitle){
+            // notes = notes.map((note, index) => {
+            //     if(id === index){
+            //         return {
+            //             ...note,
+            //             title,
+            //             date
+            //         }
+            //     }
+            // });
+            // render(notes);
+            modalHide();
+            // }
 
-    showNotes();
-
-    const btnEditHandler = () => {
-        const title = inputTitle.value;
-        notes = notes.map((note, index) => {
-            if (id === index) {
-                return {
-                    ...note,
-                    title
-                }
-            }
-            return note;
-        });
-        render(notes);
-        console.log(notes)
-
-        modalHide();
-        this.removeEventListener('click', btnEditHandler);
-        modal.querySelector('.cancel').style.display = 'none';
-
+            this.removeEventListener('click', btnEditHandler);
+        }
+        modal.addEventListener('click', btnEditHandler);
     }
 
-    modal.querySelector('.cancel').style.display = 'none';
-    const btnEdit = modal.querySelector('.save');
-    btnEdit.removeAttribute('type', 'submit');
-    btnEdit.setAttribute('type', 'button', );
-    btnEdit.addEventListener('click', btnEditHandler);
+    showNotes();
 }
 
 // Init
